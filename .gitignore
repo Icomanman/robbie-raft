@@ -1,0 +1,10 @@
+
+/tmp
+*.tmp.*
+
+# Project place file
+/raft.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
