@@ -1,1 +1,1 @@
-print("Hello world, from client!")
+-- print("> init.client.luau")
