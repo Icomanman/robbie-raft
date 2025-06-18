@@ -3,20 +3,19 @@ local players = game:GetService("Players")
 local rs = game:GetService("ReplicatedStorage")
 local Hook = require(rs.Shared.Hook)
 
-local Hooks = {} :: { [Player]: Hook }
+local Hooks = {} :: { [string]: Hook }
 
 local function spawnHook(tool: Player)
-    -- assert(typeof(tool) == "Player", "HookManager:spawnHook expects 'tool' to be a Player instance.")
-
-    if Hooks[tool] then
-        warn("Hook already exists for this tool, returning existing hook.")
-        return Hooks[tool]
+    assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookManager:spawnHook expects 'tool' to be a Player instance.")
+    local username = tool.Name
+    if Hooks[username] then
+        warn("Hook already exists for this username, returning existing hook.")
+        return Hooks[username]
     end
-
+    -- Instantiate a new Hook
     local hook = Hook.new(tool)
+    -- Store it in the Hooks table
     table.insert(Hooks, hook)
-    cs:AddTag(tool, "Hook")
-
     return hook
 end
 
