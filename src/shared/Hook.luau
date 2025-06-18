@@ -1,3 +1,4 @@
+local utils = require(script.Parent.utils.assert)
 --
 local Hook = {}
 Hook.__index = Hook
@@ -29,8 +30,9 @@ export type Hook = typeof(setmetatable(
 -- @return Hook A new Hook instance with all properties initialized.
 function Hook.new(tool: Player, id: string?, name: string?): Hook
     -- function Hook.new(tool: Tool, id: string, name: string, maxLength: number, pullForce: number): Hook
-    assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookClass:new expects 'tool' to be a Player instance.")
     -- assert(typeof(tool) == "Instance" and tool:IsA("Tool"), "HookClass:new expects 'tool' to be a Tool instance.")
+    -- assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookClass:new expects 'tool' to be a Player instance.")
+    utils.assertObjType(tool, "Player") -- Ensure tool is a Player instance
     print("HookClass:new called with tool:", tool.Name)
     return setmetatable({
         toolRef = tool, -- reference to the Tool instance
