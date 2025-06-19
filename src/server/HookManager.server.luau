@@ -1,10 +1,10 @@
-local cs = game:GetService("CollectionService")
+-- local cs = game:GetService("CollectionService")
 local players = game:GetService("Players")
 local rs = game:GetService("ReplicatedStorage")
 local Hook = require(rs.Shared.Hook)
--- 
+--
 local utils = require(rs.Shared.utils.assert)
--- 
+--
 local Hooks = {} :: { [string]: Hook }
 
 local function spawnHook(tool: Player)

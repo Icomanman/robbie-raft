@@ -1,6 +1,5 @@
-
 -- generic function signature
-local utils = { [string]: (...any) -> any }
+local utils = {} :: { [string]: (...any) -> any }
 
 --- Asserts that the given value is of the expected type.
 -- @param value any The value to check.
@@ -9,7 +8,7 @@ local utils = { [string]: (...any) -> any }
 function utils.assertObjType(obj: any, class: any): nil
     assert(
         typeof(obj) == "Instance" and obj:IsA(class),
-        string.format("Expected value of type '%s', got '%s'. %s", expectedType, typeof(value))
+        string.format("> Expected value of type '%s', got '%s'.", class, typeof(obj))
     )
 end
 

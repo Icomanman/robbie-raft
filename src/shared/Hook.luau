@@ -33,7 +33,6 @@ function Hook.new(tool: Player, id: string?, name: string?): Hook
     -- assert(typeof(tool) == "Instance" and tool:IsA("Tool"), "HookClass:new expects 'tool' to be a Tool instance.")
     -- assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookClass:new expects 'tool' to be a Player instance.")
     utils.assertObjType(tool, "Player") -- Ensure tool is a Player instance
-    print("HookClass:new called with tool:", tool.Name)
     return setmetatable({
         toolRef = tool, -- reference to the Tool instance
         active = false, -- Default: not active
@@ -52,7 +51,5 @@ end
 function Hook.scanNearbyItems()
     print("scanNearbyItems called")
 end
-
-print("> Hook from Module Script")
 
 return Hook
