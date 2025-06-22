@@ -8,7 +8,6 @@ local utils = require(rs.Shared.utils.assert)
 local Hooks = {} :: { [string]: Hook }
 
 local function spawnHook(tool: Player)
-    -- assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookManager:spawnHook expects 'tool' to be a Player instance.")
     utils.assertObjType(tool, "Player") -- Ensure tool is a Player instance
     local username = tool.Name
     if Hooks[username] then
@@ -24,8 +23,25 @@ end
 
 task.wait(1)
 for _, player in players:GetPlayers() do
-    print("Spawning hook for player:", player.Name)
     local hook = spawnHook(player)
-    print("Spawned hook for player:", player.Name, "Hook:", hook)
+    print("> Spawned hook for player:", player.Name, "Hook:", hook)
     spawnHook(player)
+
+    local backpack = player:WaitForChild("Backpack") -- Ensures backpack exists
+    local grapple = backpack:FindFirstChild("GrappleHook")
+    print("> Backpack found for " .. player.Name, backpack)
+    print("> Tool found " .. grapple.Name)
+
+    backpack.ChildAdded:Connect(function(tool: Instance)
+        if tool:IsA("Tool") then
+            print("> Tool added to backpack:", tool.Name)
+        end
+    end)
+
+    -- Handle tools already present
+    for _, tool in ipairs(backpack:GetChildren()) do
+        if tool:IsA("Tool") then
+            print("> Tool already in backpack:", tool.Name)
+        end
+    end
 end

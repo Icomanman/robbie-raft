@@ -30,8 +30,6 @@ export type Hook = typeof(setmetatable(
 -- @return Hook A new Hook instance with all properties initialized.
 function Hook.new(tool: Player, id: string?, name: string?): Hook
     -- function Hook.new(tool: Tool, id: string, name: string, maxLength: number, pullForce: number): Hook
-    -- assert(typeof(tool) == "Instance" and tool:IsA("Tool"), "HookClass:new expects 'tool' to be a Tool instance.")
-    -- assert(typeof(tool) == "Instance" and tool:IsA("Player"), "HookClass:new expects 'tool' to be a Player instance.")
     utils.assertObjType(tool, "Player") -- Ensure tool is a Player instance
     return setmetatable({
         toolRef = tool, -- reference to the Tool instance
@@ -48,8 +46,22 @@ function Hook.new(tool: Player, id: string?, name: string?): Hook
     }, Hook)
 end
 
-function Hook.scanNearbyItems()
-    print("scanNearbyItems called")
+function Hook:castAim()
+    print("Casting aim for hook:", self.id)
+    -- Implement aim casting logic here
+    -- Example: return self.toolRef.Character.HumanoidRootPart.Position + Vector3.new(0, 10, 0)
+end
+
+function Hook:fire()
+    print("Firing hook:", self.id)
+    -- Implement firing logic here
+    -- Example: self.isDeployed = true; self.length = self.maxLength
+end
+
+function Hook:pull()
+    print("Pulling with hook:", self.id)
+    -- Implement pull logic here
+    -- Example: self.toolRef.Character.Humanoid:MoveTo(self.targetPosition)
 end
 
 return Hook
